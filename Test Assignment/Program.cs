@@ -1,4 +1,7 @@
 
+using BAL.Services;
+using DAL.Repos;
+
 namespace Test_Assignment
 {
     public class Program
@@ -8,10 +11,13 @@ namespace Test_Assignment
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<ICountryBlockService, CountryBlockService>();
+            builder.Services.AddScoped<ICountryRepo, CountryRepo>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+          
 
             var app = builder.Build();
 
@@ -19,9 +25,12 @@ namespace Test_Assignment
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwaggerUI(op => op.SwaggerEndpoint("/openapi/v1.json", "v1"));
             }
 
             app.UseHttpsRedirection();
+           
+           
 
             app.UseAuthorization();
 
