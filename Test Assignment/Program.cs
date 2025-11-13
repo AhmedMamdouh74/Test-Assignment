@@ -11,7 +11,7 @@ namespace Test_Assignment
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddTransient<ICountryRepo, CountryRepo>();
+            builder.Services.AddSingleton<ICountryRepo, CountryRepo>(); // the data in memory so i need one object 
             builder.Services.AddScoped<ICountryBlockService, CountryBlockService>();
            
 
