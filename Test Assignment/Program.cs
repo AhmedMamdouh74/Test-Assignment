@@ -11,8 +11,9 @@ namespace Test_Assignment
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddTransient<ICountryRepo, CountryRepo>();
             builder.Services.AddScoped<ICountryBlockService, CountryBlockService>();
-            builder.Services.AddScoped<ICountryRepo, CountryRepo>();
+           
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

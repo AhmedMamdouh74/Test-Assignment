@@ -12,11 +12,22 @@ namespace DAL.Repos
             return Task.FromResult(added);
         }
 
+        public Task<bool> RemoveBlockedAsync(string countryCode)
+        {
+            var removed = blocks.TryRemove(countryCode.ToUpperInvariant(), out _);
+            return Task.FromResult(removed);
+        }
+
         public Task<CountryBlock?> GetBlockAsync(string countryCode)
         {
             countryCode = countryCode.ToUpperInvariant();
             blocks.TryGetValue(countryCode, out var block);
             return Task.FromResult(block);
+        }
+
+        public Task<IEnumerable<CountryBlock>> GetAllAsync()
+        {
+           return Task.FromResult(blocks.Values.AsEnumerable());
         }
     }
 }

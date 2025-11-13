@@ -2,7 +2,7 @@
 
 namespace BAL.DTOs
 {
-    public record AddBlockedCountryDto
+    public record RemoveBlockedCountryDto
     {
         [Required]
         [StringLength(2, MinimumLength = 2)]

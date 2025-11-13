@@ -17,9 +17,9 @@ namespace Test_Assignment.Controllers
         [HttpPost("block")]
         public async Task<IActionResult> BlockCountry([FromBody] AddBlockedCountryDto blockDto)
         {
-            if (blockDto == null || string.IsNullOrWhiteSpace(blockDto.CountryCode))
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Country code is required.");
+                return BadRequest(ModelState);
             }
             var result = await countryBlockService.AddBlockAsync(blockDto);
             if (!result)
@@ -27,6 +27,19 @@ namespace Test_Assignment.Controllers
                 return Conflict("Country is already blocked or invalid country code.");
             }
             return Ok("Country blocked successfully.");
+        }
+        [HttpDelete("block/{CountryCode}")]
+        public async Task<IActionResult> RemoveBlockCountry([FromRoute] RemoveBlockedCountryDto removedCountryDto)
+        {
+            var ok = await countryBlockService.RemoveBlockAsync(removedCountryDto);
+            if (!ok) return NotFound();
+            return NoContent();
+        }
+        [HttpGet("blocked")]
+        public async Task<IActionResult> GetBlockedCountries([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? search = null)
+        {
+            var result = await countryBlockService.GetAllAsync(page, pageSize, search);
+            return Ok(result);
         }
     }
 }
