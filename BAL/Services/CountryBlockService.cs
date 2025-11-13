@@ -17,7 +17,7 @@ namespace BAL.Services
         public async Task<bool> AddBlockAsync(AddBlockedCountryDto blockDto)
         {
             var countryCode = blockDto.CountryCode?.Trim().ToUpperInvariant() ?? "";
-            if (string.IsNullOrEmpty(countryCode) || countryCode.Length != 2)
+            if (!IsValidCountryCode(countryCode))
             {
                 logger.LogWarning("Invalid country code provided: {CountryCode}", blockDto.CountryCode);
                 return false;
@@ -63,8 +63,8 @@ namespace BAL.Services
 
                 blockedCountries = blockedCountries
                     .Where(c => c.CountryCode.ToUpperInvariant().Contains(term)
-                             || (!string.IsNullOrEmpty(c.CountryName) && c.CountryName.ToUpperInvariant().Contains(term)))
-                    .ToList();
+                             || (!string.IsNullOrEmpty(c.CountryName) && c.CountryName.ToUpperInvariant().Contains(term)));
+                    
 
                 logger.LogDebug("After search filter, {FilteredCount} countries remain", blockedCountries.Count());
             }
@@ -113,5 +113,19 @@ namespace BAL.Services
 
 
         }
+        private bool IsValidCountryCode(string code)
+        {
+            try
+            {
+                var region = new System.Globalization.RegionInfo(code);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
+
 }
