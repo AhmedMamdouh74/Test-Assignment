@@ -1,7 +1,7 @@
-﻿using BAL.DTOs;
+﻿using Application.DTOs;
 using Models;
 
-namespace BAL.Services
+namespace Application.Services
 {
     public interface ICountryBlockService
     {

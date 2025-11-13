@@ -1,6 +1,6 @@
 ﻿using Models;
 
-namespace DAL.Repos
+namespace Domain.Repos
 {
     public interface ICountryRepo
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BAL.DTOs
+namespace Application.DTOs
 {
     public record AddBlockedCountryDto
     {

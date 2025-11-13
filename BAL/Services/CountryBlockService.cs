@@ -1,9 +1,9 @@
-﻿using BAL.DTOs;
-using DAL.Repos;
+﻿using Application.DTOs;
+using Domain.Repos;
 using Microsoft.Extensions.Logging;
 using Models;
 
-namespace BAL.Services
+namespace Application.Services
 {
     public class CountryBlockService : ICountryBlockService
     {
@@ -96,7 +96,7 @@ namespace BAL.Services
                 blockedCountries = blockedCountries
                     .Where(c => c.CountryCode.ToUpperInvariant().Contains(term)
                              || (!string.IsNullOrEmpty(c.CountryName) && c.CountryName.ToUpperInvariant().Contains(term)));
-                    
+
 
                 logger.LogDebug("After search filter, {FilteredCount} countries remain", blockedCountries.Count());
             }

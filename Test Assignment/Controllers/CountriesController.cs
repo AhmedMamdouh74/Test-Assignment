@@ -1,7 +1,7 @@
-﻿using BAL.DTOs;
-using BAL.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Test_Assignment.Controllers
 {

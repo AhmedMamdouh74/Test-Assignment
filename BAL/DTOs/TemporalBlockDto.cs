@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BAL.DTOs
+namespace Application.DTOs
 {
     public record TemporalBlockDto
     {

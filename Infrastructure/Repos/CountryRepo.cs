@@ -1,7 +1,8 @@
-﻿using Models;
+﻿using Domain.Repos;
+using Models;
 using System.Collections.Concurrent;
 
-namespace DAL.Repos
+namespace Infrastructure.Repos
 {
     public class CountryRepo : ICountryRepo
     {

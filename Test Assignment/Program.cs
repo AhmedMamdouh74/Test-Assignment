@@ -1,6 +1,8 @@
 
-using BAL.Services;
-using DAL.Repos;
+using Application.Services;
+using Infrastructure.DI;
+
+
 
 namespace Test_Assignment
 {
@@ -11,7 +13,8 @@ namespace Test_Assignment
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddSingleton<ICountryRepo, CountryRepo>(); // the data in memory so i need one object 
+            builder.Services.AddInfrastructure();
+            // the data in memory so i need one object 
             builder.Services.AddScoped<ICountryBlockService, CountryBlockService>();
            
 
