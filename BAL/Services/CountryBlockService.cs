@@ -49,29 +49,44 @@ namespace BAL.Services
 
         public async Task<PagedResult<CountryBlock>> GetAllAsync(int page, int pageSize, string? search)
         {
-            var blockedCountries = await repo.GetAllAsync();
-            if (!String.IsNullOrWhiteSpace(search))
-            {
+            logger.LogInformation("Fetching blocked countries (Page: {Page}, PageSize: {PageSize}, Search: {Search})", page, pageSize, search);
 
+            var blockedCountries = await repo.GetAllAsync();
+
+            logger.LogDebug("Retrieved {Count} blocked countries from repository", blockedCountries.Count());
+
+            if (!string.IsNullOrWhiteSpace(search))
+            {
                 var term = search.Trim().ToUpperInvariant();
+
+                logger.LogInformation("Applying search filter with term: {Term}", term);
+
                 blockedCountries = blockedCountries
                     .Where(c => c.CountryCode.ToUpperInvariant().Contains(term)
-                             || (!string.IsNullOrEmpty(c.CountryName) && c.CountryName.ToUpperInvariant().Contains(term)));
+                             || (!string.IsNullOrEmpty(c.CountryName) && c.CountryName.ToUpperInvariant().Contains(term)))
+                    .ToList();
+
+                logger.LogDebug("After search filter, {FilteredCount} countries remain", blockedCountries.Count());
             }
+
             var totalCount = blockedCountries.Count();
-            var Items = blockedCountries
+            var items = blockedCountries
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
+            logger.LogInformation("Returning paged result: {ReturnedCount}/{TotalCount} countries (Page: {Page})",
+                items.Count, totalCount, page);
+
             return new PagedResult<CountryBlock>
             {
-                Items = Items,
+                Items = items,
                 TotalCount = totalCount,
                 Page = page,
                 PageSize = pageSize
             };
         }
+
 
         public async Task<bool> RemoveBlockAsync(RemoveBlockedCountryDto removeCountryDto)
         {
