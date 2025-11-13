@@ -47,6 +47,38 @@ namespace BAL.Services
 
         }
 
+        public async Task<bool> AddTemporalBlockAsync(TemporalBlockDto blockDto)
+        {
+            var countryCode = blockDto.CountryCode?.Trim().ToUpperInvariant() ?? "";
+
+            if (!IsValidCountryCode(countryCode))
+            {
+                logger.LogWarning("Invalid country code provided: {CountryCode}", blockDto.CountryCode);
+                return false;
+            }
+            var existing = await repo.GetBlockAsync(countryCode);
+            if (existing != null)
+            {
+                logger.LogInformation("Country code {CountryCode} is already blocked.", countryCode);
+                return false;
+            }
+            var countryBlock = new Models.CountryBlock
+            {
+                CountryCode = countryCode,
+                CountryName = "",
+                BlockedUntilUtc = DateTime.UtcNow.AddMinutes(blockDto.DurationMinutes)
+            };
+            var created = await repo.AddBlockAsync(countryBlock);
+            if (!created)
+            {
+                logger.LogError("Failed to add temporal blockDto for country code {CountryCode}.", countryCode);
+                return false;
+            }
+            logger.LogInformation("Added temporal blockDto for {Country} until {BlockedUntilUtc}", countryCode, countryBlock.BlockedUntilUtc);
+            return true;
+
+        }
+
         public async Task<PagedResult<CountryBlock>> GetAllAsync(int page, int pageSize, string? search)
         {
             logger.LogInformation("Fetching blocked countries (Page: {Page}, PageSize: {PageSize}, Search: {Search})", page, pageSize, search);

@@ -8,5 +8,6 @@ namespace DAL.Repos
         Task<CountryBlock?> GetBlockAsync(string countryCode);
         Task<bool> RemoveBlockedAsync(string countryCode);
         Task<IEnumerable<CountryBlock>> GetAllAsync();
+        Task<bool> AddTemporalBlockAsync(CountryBlock countryBlock);
     }
 }

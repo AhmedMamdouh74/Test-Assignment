@@ -29,5 +29,11 @@ namespace DAL.Repos
         {
            return Task.FromResult(blocks.Values.AsEnumerable());
         }
+
+        public Task<bool> AddTemporalBlockAsync(CountryBlock countryBlock)
+        {
+            var added = blocks.TryAdd(countryBlock.CountryCode.ToUpperInvariant(), countryBlock);
+            return Task.FromResult(added);
+        }
     }
 }
