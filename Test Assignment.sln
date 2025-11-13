@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
+VisualStudioVersion = 17.14.36705.20
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALayer", "Test Assignment\ALayer.csproj", "{14BACF7B-395F-4038-A180-8CC84C0952F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Test Assignment\Api.csproj", "{14BACF7B-395F-4038-A180-8CC84C0952F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{117BAB67-DB19-41AF-B3C9-8FCCD158C6A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "BAL\Application.csproj", "{117BAB67-DB19-41AF-B3C9-8FCCD158C6A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{73A801EA-A0A5-4807-BD2D-D166770E0E83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "DAL\Domain.csproj", "{73A801EA-A0A5-4807-BD2D-D166770E0E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{352AAE32-BCD9-4ABA-AE91-E3A985588A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{73A801EA-A0A5-4807-BD2D-D166770E0E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73A801EA-A0A5-4807-BD2D-D166770E0E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73A801EA-A0A5-4807-BD2D-D166770E0E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{352AAE32-BCD9-4ABA-AE91-E3A985588A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{352AAE32-BCD9-4ABA-AE91-E3A985588A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{352AAE32-BCD9-4ABA-AE91-E3A985588A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{352AAE32-BCD9-4ABA-AE91-E3A985588A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
