@@ -7,6 +7,10 @@ namespace Infrastructure.Repos
     public class CountryRepo : ICountryRepo
     {
         private readonly ConcurrentDictionary<string, CountryBlock> blocks = new(StringComparer.OrdinalIgnoreCase);
+        public CountryRepo(ConcurrentDictionary<string, CountryBlock> _blocks)
+        {
+            blocks = _blocks;
+        }
         public Task<bool> AddBlockAsync(CountryBlock block)
         {
             var added = blocks.TryAdd(block.CountryCode.ToUpperInvariant(), block);
@@ -28,7 +32,7 @@ namespace Infrastructure.Repos
 
         public Task<IEnumerable<CountryBlock>> GetAllAsync()
         {
-           return Task.FromResult(blocks.Values.AsEnumerable());
+            return Task.FromResult(blocks.Values.AsEnumerable());
         }
 
         public Task<bool> AddTemporalBlockAsync(CountryBlock countryBlock)

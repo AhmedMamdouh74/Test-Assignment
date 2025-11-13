@@ -1,6 +1,8 @@
 
 using Application.Services;
 using Infrastructure.DI;
+using Models;
+using System.Collections.Concurrent;
 
 
 
@@ -13,8 +15,10 @@ namespace Test_Assignment
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            
             builder.Services.AddInfrastructure();
-            // the data in memory so i need one object 
+         
+
             builder.Services.AddScoped<ICountryBlockService, CountryBlockService>();
            
 

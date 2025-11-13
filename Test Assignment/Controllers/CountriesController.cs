@@ -41,5 +41,19 @@ namespace Test_Assignment.Controllers
             var result = await countryBlockService.GetAllAsync(page, pageSize, search);
             return Ok(result);
         }
+        [HttpPost("temporal-block")]
+        public async Task<IActionResult> AddTemporalBlock([FromBody] TemporalBlockDto temporalBlockDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await countryBlockService.AddTemporalBlockAsync(temporalBlockDto);
+            if (!result)
+            {
+                return Conflict("Country is already blocked or invalid country code.");
+            }
+            return Ok("Country temporally blocked successfully.");
+        }
     }
 }
